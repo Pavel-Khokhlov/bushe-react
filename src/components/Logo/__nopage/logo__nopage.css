@@ -1,0 +1,4 @@
+.logo__nopage {
+  width: min(100px, 30vw);
+  height: min(100px, 30vw);
+}

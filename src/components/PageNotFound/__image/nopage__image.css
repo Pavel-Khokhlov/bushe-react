@@ -1,0 +1,4 @@
+.nopage__image {
+  width: min(100px, 30vw);
+  height: min(100px, 30vw);
+}

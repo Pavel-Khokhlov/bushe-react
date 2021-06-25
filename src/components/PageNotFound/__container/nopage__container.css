@@ -1,0 +1,7 @@
+.nopage__container {
+  height: 40vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

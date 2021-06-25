@@ -1,0 +1,11 @@
+@import url(./__container/nopage__container.css);
+@import url(./__block/nopage__block.css);
+@import url(./__image/nopage__image.css);
+
+.nopage {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

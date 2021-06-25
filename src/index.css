@@ -1,0 +1,17 @@
+@import url(./vendor/normalize.css);
+@import url(./vendor/fonts/fonts.css);
+@import url(./block/bg-color/bg-color.css);
+@import url(./block/text-color/text-color.css);
+@import url(./block/text-size/text-size.css);
+@import url(./block/title/title.css);
+@import url(./block/subtitle/subtitle.css);
+@import url(./block/paragraph/paragraph.css);
+
+@import url(./block/animation/rotation/rotation.css);
+
+body {
+  margin: 0;
+  font-family: "Roboto", 'Times New Roman', Times, serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

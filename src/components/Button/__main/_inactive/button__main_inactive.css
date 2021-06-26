@@ -1,0 +1,7 @@
+.button__main_inactive {
+  color: grey;
+  border: 1px solid grey;
+  background-color: transparent;
+  pointer-events: none;
+  cursor: not-allowed !important;
+}

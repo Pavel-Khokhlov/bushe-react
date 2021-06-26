@@ -3,4 +3,8 @@ export const PORT = 5000;
 export const PROXY = 'https://cors-anywhere.herokuapp.com/';
 export const COUNT = 30;
 
+export const REG_EMAIL = /^[^@]+@[^@.]+\.[^@]+$/;
+
+export const REG_PASSWORD = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\w\s]).{8,}/;
+
 // export const BASE_URL = "https://rickandmortyapi.com/api/episode";

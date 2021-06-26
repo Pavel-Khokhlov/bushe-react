@@ -1,4 +1,5 @@
 @import url(./_border/button__word_border.css);
+@import url(./_inactive/button__word_inactive.css);
 
 .button__word {
   padding: 0;

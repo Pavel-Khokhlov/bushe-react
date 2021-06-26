@@ -1,4 +1,5 @@
 @import url(./__word/button__word.css);
+@import url(./__main/button__main.css);
 
 .button {
   /* сброс стилей */

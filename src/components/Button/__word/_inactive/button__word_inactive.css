@@ -1,0 +1,5 @@
+.button__word_inactive {
+  color: grey;
+  pointer-events: none;
+  cursor: not-allowed !important;
+}

@@ -4,11 +4,10 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import Header from "../../components/Header/Header";
 import PageMain from "../PageMain/PageMain";
-import PageData from "../PageData/DataPage";
+import PageData from "../PageData/PageData";
 import PageStatistic from "../PageStatistic/PageStatistic";
 import PageProfile from "../PageProfile/PageProfile";
 import PageLogin from "../PageLogin/PageLogin";
-import PageRegister from "../PageRegister/PageRegister";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import api from "../../utils/Api";
 
@@ -18,8 +17,8 @@ import "./App.css";
 function App() {
   const history = useHistory();
   const [currentUser, setCurrentUser] = useState({
-    email: "mail@gmail.com",
-    name: "Name",
+    email: "",
+    password: "",
   });
   const [loggedIn, setLoggedIn] = useState(false);
   const [dataList, setDataList] = useState();
@@ -34,6 +33,29 @@ function App() {
     }
     setDataList(data);
   }, []);
+
+  useEffect(() => {
+    checkCurrentUser();
+    if (loggedIn === true) {
+      history.push("/data-list");
+    } else {
+      history.push("/");
+    }
+  }, [loggedIn])
+
+  function checkCurrentUser() {
+    let user = JSON.parse(localStorage.getItem('currentUser'));
+    if (!user) {
+      return handleSignOutClick();
+    }
+    setCurrentUser((prevState, prevProps) => {
+      return {
+        email: (prevState.email = user.email),
+        password: (prevState.password = user.password),
+      };
+    });
+    return setLoggedIn(true);
+  }
 
   function getDataList() {
     api
@@ -51,9 +73,43 @@ function App() {
     });
   }
 
+  function handleEditClick(email, password) {
+    setCurrentUser((prevState, prevProps) => {
+      return {
+        email: (prevState.email = email),
+        password: (prevState.password = password),
+      };
+    });
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+  }
+
+  function handleSignInClick(email, password) {
+    setCurrentUser((prevState, prevProps) => {
+      return {
+        email: (prevState.email = email),
+        password: (prevState.password = password),
+      };
+    });
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+    setLoggedIn(true);
+    history.push("/data-list");
+  }
+
+  function handleSignOutClick() {
+    setCurrentUser((prevState, prevProps) => {
+      return {
+        email: (prevState.email = ""),
+        password: (prevState.password = ""),
+      };
+    });
+    localStorage.removeItem("currentUser");
+    setLoggedIn( State => State = false);
+    history.push("/");
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <Header isLoggedIn={loggedIn} />
+      {loggedIn && <Header isLoggedIn={loggedIn} />}
       <Switch>
         <Route exact path="/" component={PageMain} />
         <ProtectedRoute
@@ -72,10 +128,13 @@ function App() {
         <ProtectedRoute
           path="/profile"
           isLoggedIn={loggedIn}
+          onEditProfile={handleEditClick}
+          onSignOut={handleSignOutClick}
           component={PageProfile}
         />
-        <Route path="/login" component={PageLogin} />
-        <Route path="/register" component={PageRegister} />
+        <Route path="/login">
+          <PageLogin isLoggedIn={loggedIn} onSignIn={handleSignInClick} />
+        </Route>
         <Route path="*" component={PageNotFound} />
       </Switch>
     </CurrentUserContext.Provider>

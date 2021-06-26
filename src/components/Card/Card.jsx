@@ -40,8 +40,6 @@ function Card({
 
   var day = new Date(calltime * 1000).toLocaleDateString("ru-RU");
   var time = new Date(calltime * 1000).toLocaleTimeString("ru-RU");
-  console.log(day);
-  console.log(time);
 
   return (
     <li className={cardClassName}>

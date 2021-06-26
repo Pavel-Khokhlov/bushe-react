@@ -31,20 +31,6 @@ const Navigation = ({ isLoggedIn }) => {
         >
           {currentUser.email}
         </NavLink> : ""}
-        {isLoggedIn ? "" : <NavLink
-          to="/register"
-          className="nav__item"
-          activeClassName="nav__item_active"
-        >
-          Регистрация
-        </NavLink>}
-        {isLoggedIn ? "" : <NavLink
-          to="/login"
-          className="nav__item"
-          activeClassName="nav__item_active"
-        >
-          Вход
-        </NavLink>}
       </nav>
   );
 };

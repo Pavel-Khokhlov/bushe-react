@@ -1,6 +1,10 @@
+@import url(./__header/card__header.css);
+
 .card {
   display: grid;
   grid-template-columns: 1fr 4fr 4fr 4fr 3fr 3fr 2fr;
   border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
   text-align: center;
 }

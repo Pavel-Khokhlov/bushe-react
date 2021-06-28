@@ -1,7 +1,7 @@
 import { useState, useContext, useCallback } from "react";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 
-import { REG_EMAIL, REG_PASSWORD } from "../../utils/config";
+import { REG_EMAIL } from "../../utils/config";
 
 export function useForm() {
   const [values, setValues] = useState({});

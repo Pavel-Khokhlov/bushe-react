@@ -1,21 +1,15 @@
 import React from "react";
-import Button from "../Button/Button.jsx";
 
 import "./Card.css";
 
-function Card({
+function CardInfo({
   id,
   number,
   calltime,
   s_in_wait,
   s_in_talk,
   agent,
-  onGetPhoneInfo,
 }) {
-  function handlePhoneClick(e) {
-    e.preventDefault();
-    onGetPhoneInfo(number);
-  }
 
   const cardClassName = `card ${id % 2 ? "bg-color__grey" : ""}`;
 
@@ -35,13 +29,7 @@ function Card({
   return (
     <li className={cardClassName}>
       <p className="paragraph">{id}</p>
-      <Button
-        type="button"
-        onClick={handlePhoneClick}
-        className="button button__word text-color__blue card__number"
-      >
-        {`+${number}`}
-      </Button>
+      <p className="paragraph">{`+${number}`}</p>
       <p className="paragraph">{day}</p>
       <p className="paragraph">{time}</p>
       <p className="paragraph">{callWait}</p>
@@ -51,4 +39,4 @@ function Card({
   );
 }
 
-export default Card;
+export default CardInfo;

@@ -9,6 +9,7 @@ import PageStatistic from "../PageStatistic/PageStatistic";
 import PageProfile from "../PageProfile/PageProfile";
 import PageLogin from "../PageLogin/PageLogin";
 import PageNotFound from "../PageNotFound/PageNotFound";
+import Popup from "../Popup/Popup";
 import api from "../../utils/Api";
 
 import { COUNT } from "../../utils/config";
@@ -20,11 +21,14 @@ function App() {
     email: "",
     password: "",
   });
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(null);
   const [dataList, setDataList] = useState();
+  const [dataFiltered, setDataFiltered] = useState(null);
+  const [titleInfo, setTitleInfo] = useState('');
   const [countState, setCountState] = useState({
     count: COUNT,
   });
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
     const data = localStorage.getItem("dataList");
@@ -41,10 +45,10 @@ function App() {
     } else {
       history.push("/");
     }
-  }, [loggedIn])
+  }, [loggedIn]);
 
   function checkCurrentUser() {
-    let user = JSON.parse(localStorage.getItem('currentUser'));
+    let user = JSON.parse(localStorage.getItem("currentUser"));
     if (!user) {
       return handleSignOutClick();
     }
@@ -103,10 +107,26 @@ function App() {
       };
     });
     localStorage.removeItem("currentUser");
-    setLoggedIn( State => State = false);
+    setLoggedIn((State) => (State = false));
     history.push("/");
   }
 
+  let data = JSON.parse(localStorage.getItem("dataList"));
+  function handleGetPhoneInfo(number) {
+    setTitleInfo(`Информмация по телефону: +${number}`)
+    setDataFiltered(data.filter((arr) => arr[0] === number));
+    setIsPopupOpen(true);
+  }
+
+  function closePopup() {
+    setIsPopupOpen(false);
+    setTitleInfo('');
+    setDataFiltered(null)
+  }
+
+  if (loggedIn === null) {
+    return "Загрузка...";
+  }
   return (
     <CurrentUserContext.Provider value={currentUser}>
       {loggedIn && <Header isLoggedIn={loggedIn} />}
@@ -115,9 +135,9 @@ function App() {
         <ProtectedRoute
           path="/data-list"
           isLoggedIn={loggedIn}
-          data={dataList}
           count={countState.count}
           onGetMoreDataListClick={handleGetMoreDataList}
+          onGetPhoneInfo={handleGetPhoneInfo}
           component={PageData}
         />
         <ProtectedRoute
@@ -137,6 +157,7 @@ function App() {
         </Route>
         <Route path="*" component={PageNotFound} />
       </Switch>
+      <Popup isOpen={isPopupOpen} onClose={closePopup} title={titleInfo} dataFiltered={dataFiltered} />
     </CurrentUserContext.Provider>
   );
 }

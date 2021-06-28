@@ -25,7 +25,7 @@ const Input = ({
         onChange={onChange}
         value={value || ""}
         disabled={formDisabled}
-        minlength={min}
+        minLength={min}
         required
       />
       <p className="input__error">{errors}</p>

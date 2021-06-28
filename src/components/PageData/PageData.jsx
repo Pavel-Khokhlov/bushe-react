@@ -1,10 +1,11 @@
 import React from "react";
-import Card from "../Card/Card.jsx";
-import Button from "../Button/Button.jsx";
+import CardHeader from "../Card/CardHeader";
+import Card from "../Card/Card";
+import Button from "../Button/Button";
 
 import "./PageData.css";
 
-function PageData({ count, onGetMoreDataListClick }) {
+function PageData({ count, onGetMoreDataListClick, onGetPhoneInfo }) {
   const data = JSON.parse(localStorage.getItem("dataList"));
 
   function handleMoreClick(e) {
@@ -14,15 +15,7 @@ function PageData({ count, onGetMoreDataListClick }) {
 
   return (
     <section className="data">
-      <div className="card">
-        <p className="card__wait">№</p>
-        <p className="card__wait">Телефон</p>
-        <p className="card__talk">Дата</p>
-        <p className="card__talk">Время</p>
-        <p className="card__talk">Ожидание</p>
-        <p className="card__talk">Длительность</p>
-        <p className="card__talk">Оператор</p>
-      </div>
+      <CardHeader />
       <ul className="data__list">
         {data
           .filter((v, i) => i < count)
@@ -36,6 +29,7 @@ function PageData({ count, onGetMoreDataListClick }) {
                 s_in_wait={card[2]}
                 s_in_talk={card[3]}
                 agent={card[4]}
+                onGetPhoneInfo={onGetPhoneInfo}
               />
             );
           })}
@@ -46,7 +40,7 @@ function PageData({ count, onGetMoreDataListClick }) {
           className="button button__word text-color__blue paragraph text-size__s"
           onClick={handleMoreClick}
         >
-          Ещё
+          Ещё...
         </Button>
       )}
     </section>

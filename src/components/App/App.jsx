@@ -12,7 +12,7 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 import Popup from "../Popup/Popup";
 import api from "../../utils/Api";
 
-import { COUNT } from "../../utils/config";
+import { COUNT, ESC_CODE } from "../../utils/config";
 import "./App.css";
 
 function App() {
@@ -46,6 +46,12 @@ function App() {
       history.push("/");
     }
   }, [loggedIn]);
+
+  function handleEsc(e) {
+    if (e.keyCode === ESC_CODE) {
+      closePopup();
+    }
+  }
 
   function checkCurrentUser() {
     let user = JSON.parse(localStorage.getItem("currentUser"));
@@ -116,12 +122,14 @@ function App() {
     setTitleInfo(`Информмация по телефону: +${number}`)
     setDataFiltered(data.filter((arr) => arr[0] === number));
     setIsPopupOpen(true);
+    window.addEventListener("keydown", handleEsc);
   }
 
   function closePopup() {
     setIsPopupOpen(false);
     setTitleInfo('');
     setDataFiltered(null)
+    window.removeEventListener("keydown", handleEsc);
   }
 
   if (loggedIn === null) {

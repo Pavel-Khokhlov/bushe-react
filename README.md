@@ -5,7 +5,7 @@
 [Link to proxy](https://cors-anywhere.herokuapp.com/)
 
 * Далее перейдите по ссылке на gh-pages ->
-[Start Progect](https://cors-anywhere.herokuapp.com/)
+[Start Progect](https://pavel-khokhlov.github.io/bushe-react/)
 
 **TECHNOLOGIES**
 * HTML, CSS, JS, ReactJS

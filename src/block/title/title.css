@@ -1,6 +1,7 @@
 @import url(./__nopage/title__nopage.css);
 @import url(./__main/title__main.css);
 @import url(./__login/title__login.css);
+@import url(./__margin/title__margin.css);
 
 .title {
   padding: 0;

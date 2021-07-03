@@ -1,6 +1,8 @@
 import React from "react";
 import Button from "../Button/Button.jsx";
 
+import { useConvert } from "../Hooks/useConvert";
+
 import "./Card.css";
 
 function Card({
@@ -12,6 +14,8 @@ function Card({
   agent,
   onGetPhoneInfo,
 }) {
+  const { convertSeconds, convertDate, convertTime } = useConvert();
+
   function handlePhoneClick(e) {
     e.preventDefault();
     onGetPhoneInfo(number);
@@ -20,17 +24,12 @@ function Card({
   const cardClassName = `card ${id % 2 ? "bg-color__grey" : ""}`;
 
   // CALL WAIT DURATION
-  const MinutsWait = Math.floor(s_in_wait / 60);
-  const SecondsWait = s_in_wait % 60;
-  const callWait = `${MinutsWait}м : ${SecondsWait}с`;
-
+  const callWait = convertSeconds(s_in_wait);
   // CALL TALK DURATION
-  const MinutsTalk = Math.floor(s_in_talk / 60);
-  const SecondsTalk = s_in_talk % 60;
-  const callTalk = `${MinutsTalk}м : ${SecondsTalk}с`;
-
-  var day = new Date(calltime * 1000).toLocaleDateString("ru-RU");
-  var time = new Date(calltime * 1000).toLocaleTimeString("ru-RU");
+  const callTalk = convertSeconds(s_in_talk);
+  // CALL DAY & TIME
+  const callDay = convertDate(calltime);
+  const callTime = convertTime(calltime);
 
   return (
     <li className={cardClassName}>
@@ -42,8 +41,8 @@ function Card({
       >
         {`+${number}`}
       </Button>
-      <p className="paragraph">{day}</p>
-      <p className="paragraph">{time}</p>
+      <p className="paragraph">{callDay}</p>
+      <p className="paragraph">{callTime}</p>
       <p className="paragraph">{callWait}</p>
       <p className="paragraph">{callTalk}</p>
       <p className="paragraph">{agent}</p>

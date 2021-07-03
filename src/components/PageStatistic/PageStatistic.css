@@ -1,0 +1,10 @@
+@import url(./__common/statistic__common.css);
+
+.statistic {
+  width: 90vw;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}

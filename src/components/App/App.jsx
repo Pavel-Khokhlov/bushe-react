@@ -24,7 +24,8 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(null);
   const [dataList, setDataList] = useState();
   const [dataFiltered, setDataFiltered] = useState(null);
-  const [titleInfo, setTitleInfo] = useState('');
+  const [statisticData, setStatisticData] = useState(null);
+  const [titleInfo, setTitleInfo] = useState("");
   const [countState, setCountState] = useState({
     count: COUNT,
   });
@@ -113,13 +114,13 @@ function App() {
       };
     });
     localStorage.removeItem("currentUser");
-    setLoggedIn((State) => (State = false));
+    setLoggedIn((state) => (state = false));
     history.push("/");
   }
 
   let data = JSON.parse(localStorage.getItem("dataList"));
   function handleGetPhoneInfo(number) {
-    setTitleInfo(`Информмация по телефону: +${number}`)
+    setTitleInfo(`Информация по телефону: +${number}`);
     setDataFiltered(data.filter((arr) => arr[0] === number));
     setIsPopupOpen(true);
     window.addEventListener("keydown", handleEsc);
@@ -127,9 +128,14 @@ function App() {
 
   function closePopup() {
     setIsPopupOpen(false);
-    setTitleInfo('');
-    setDataFiltered(null)
+    setTitleInfo("");
+    setDataFiltered(null);
     window.removeEventListener("keydown", handleEsc);
+  }
+
+  function handleSearchClick(agent) {
+    const newArray = data.filter((arr) => String(arr[4]) === agent);
+    setStatisticData(newArray);
   }
 
   if (loggedIn === null) {
@@ -151,6 +157,9 @@ function App() {
         <ProtectedRoute
           path="/statistic"
           isLoggedIn={loggedIn}
+          statisticData={statisticData}
+          setStatisticData={setStatisticData}
+          onSearch={handleSearchClick}
           component={PageStatistic}
         />
         <ProtectedRoute
@@ -165,7 +174,12 @@ function App() {
         </Route>
         <Route path="*" component={PageNotFound} />
       </Switch>
-      <Popup isOpen={isPopupOpen} onClose={closePopup} title={titleInfo} dataFiltered={dataFiltered} />
+      <Popup
+        isOpen={isPopupOpen}
+        onClose={closePopup}
+        title={titleInfo}
+        dataFiltered={dataFiltered}
+      />
     </CurrentUserContext.Provider>
   );
 }

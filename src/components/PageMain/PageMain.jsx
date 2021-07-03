@@ -11,7 +11,7 @@ function PageMain() {
       <Logo className="logo__main" />
       <h1 className="title title__main text-size__l">база данных</h1>
       <h2 className="subtitle subtitle__main text-size__m">
-        Только для сотрудников компании.
+        Только для сотрудников компании
       </h2>
       <NavLink
         to="/login"

@@ -1,18 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Loader from '../Loader/Loader';
 import CardHeader from "../Card/CardHeader";
 import Card from "../Card/Card";
 import Button from "../Button/Button";
 
 import "./PageData.css";
 
-function PageData({ count, onGetMoreDataListClick, onGetPhoneInfo }) {
+function PageData({
+  noData,
+  count,
+  onGetMoreDataListClick,
+  onGetPhoneInfo,
+  onGetDataList,
+  setNoData,
+}) {
   const data = JSON.parse(localStorage.getItem("dataList"));
+
+  useEffect(() => {
+    if (!!data) {
+      setNoData(false);
+    }
+    handleGetDataList();
+  }, []);
+
+  function handleGetDataList() {
+    onGetDataList();
+  }
 
   function handleMoreClick(e) {
     e.preventDefault();
     onGetMoreDataListClick();
   }
-
+  if (noData) {
+    return <Loader />;
+  }
   return (
     <section className="data">
       <CardHeader />

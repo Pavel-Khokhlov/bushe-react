@@ -22,7 +22,7 @@ function App() {
     password: "",
   });
   const [loggedIn, setLoggedIn] = useState(null);
-  const [dataList, setDataList] = useState();
+  const [noData, setNoData] = useState(true);
   const [dataFiltered, setDataFiltered] = useState(null);
   const [statisticData, setStatisticData] = useState(null);
   const [titleInfo, setTitleInfo] = useState("");
@@ -30,14 +30,6 @@ function App() {
     count: COUNT,
   });
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  useEffect(() => {
-    const data = localStorage.getItem("dataList");
-    if (data === null) {
-      getDataList();
-    }
-    setDataList(data);
-  }, []);
 
   useEffect(() => {
     checkCurrentUser();
@@ -68,19 +60,19 @@ function App() {
     return setLoggedIn(true);
   }
 
-  function getDataList() {
+  function handleDataList() {
     api
       .getList()
       .then((res) => {
         localStorage.setItem("dataList", JSON.stringify(res.data));
-        setDataList(res.data);
       })
+      .then(() => setNoData(false))
       .catch((err) => console.log(err));
   }
 
   function handleGetMoreDataList() {
     setCountState((prevCountState, prevProps) => {
-      return { count: prevCountState.count + 30 };
+      return { count: prevCountState.count + COUNT };
     });
   }
 
@@ -114,7 +106,9 @@ function App() {
       };
     });
     localStorage.removeItem("currentUser");
+    localStorage.removeItem("dataList");
     setLoggedIn((state) => (state = false));
+    setNoData(true);
     history.push("/");
   }
 
@@ -149,9 +143,12 @@ function App() {
         <ProtectedRoute
           path="/data-list"
           isLoggedIn={loggedIn}
+          noData={noData}
+          setNoData={setNoData}
           count={countState.count}
           onGetMoreDataListClick={handleGetMoreDataList}
           onGetPhoneInfo={handleGetPhoneInfo}
+          onGetDataList={handleDataList}
           component={PageData}
         />
         <ProtectedRoute

@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import FormSearch from "../FormSearch/FormSearch";
 import Select from "../Select/Select";
 
-import "./PageStatistic.css";
 import StatisticInfo from "../StatisticInfo/StatisticInfo";
+
+import "./PageStatistic.css";
 
 function PageStatistic({ statisticData, setStatisticData, onSearch }) {
   const data = JSON.parse(localStorage.getItem("dataList"));

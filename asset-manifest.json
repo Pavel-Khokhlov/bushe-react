@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/bushe-react/static/css/main.2ab0c673.chunk.css",
-    "main.js": "/bushe-react/static/js/main.ab2d0df0.chunk.js",
-    "main.js.map": "/bushe-react/static/js/main.ab2d0df0.chunk.js.map",
+    "main.js": "/bushe-react/static/js/main.aec342ec.chunk.js",
+    "main.js.map": "/bushe-react/static/js/main.aec342ec.chunk.js.map",
     "runtime-main.js": "/bushe-react/static/js/runtime-main.5ed502c1.js",
     "runtime-main.js.map": "/bushe-react/static/js/runtime-main.5ed502c1.js.map",
     "static/js/2.44277e00.chunk.js": "/bushe-react/static/js/2.44277e00.chunk.js",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.5ed502c1.js",
     "static/js/2.44277e00.chunk.js",
     "static/css/main.2ab0c673.chunk.css",
-    "static/js/main.ab2d0df0.chunk.js"
+    "static/js/main.aec342ec.chunk.js"
   ]
 }

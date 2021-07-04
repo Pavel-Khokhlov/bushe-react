@@ -169,7 +169,9 @@ function App() {
         <Route path="/login">
           <PageLogin isLoggedIn={loggedIn} onSignIn={handleSignInClick} />
         </Route>
-        <Route path="*" component={PageNotFound} />
+        <Route path="/*">
+          <PageNotFound />
+        </Route>
       </Switch>
       <Popup
         isOpen={isPopupOpen}

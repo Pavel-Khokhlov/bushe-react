@@ -9,6 +9,8 @@ import "./PageStatistic.css";
 function PageStatistic({ statisticData, setStatisticData, onSearch }) {
   const data = JSON.parse(localStorage.getItem("dataList"));
   const [agent, setAgent] = useState("");
+  const [titleStatistic, setTitleStatistic] = useState("");
+
 
   useEffect(() => {
     setStatisticData(null)
@@ -31,6 +33,8 @@ function PageStatistic({ statisticData, setStatisticData, onSearch }) {
   function handleSearchClick(e) {
     e.preventDefault();
     onSearch(agent);
+    setTitleStatistic(`Cтатистика по оператору : ${agent}`);
+    setAgent('');
   }
 
   return (
@@ -50,7 +54,7 @@ function PageStatistic({ statisticData, setStatisticData, onSearch }) {
         />
       </FormSearch>
       {statisticData !== null ? (
-        <StatisticInfo array={statisticData} title={`Cтатистика по оператору ${agent}`} />
+        <StatisticInfo array={statisticData} title={titleStatistic} />
       ) : (
         <div className="statistic__agent">Ожидание информации по поиску...</div>
       )}

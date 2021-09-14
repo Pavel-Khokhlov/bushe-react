@@ -1,5 +1,5 @@
-import { useState, useContext, useCallback } from "react";
-import { CurrentUserContext } from "../../context/CurrentUserContext";
+import { useState, useCallback } from "react";
+import { useSelector } from "react-redux";
 
 import { REG_EMAIL } from "../../utils/config";
 
@@ -16,7 +16,9 @@ export function useForm() {
 }
 
 export function useFormWithValidation() {
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser } = useSelector(
+    (state) => state.users
+  );
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
@@ -71,7 +73,7 @@ export function useFormWithValidation() {
 
   const resetFormCurrentUser = useCallback(
     (
-      newValues = { email: currentUser.email, password: currentUser.password },
+      newValues = currentUser,
       newErrors = {},
       newIsValid = false
     ) => {

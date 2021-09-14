@@ -5,7 +5,7 @@ import { useFormWithValidation } from "../Hooks/useForm";
 
 import "./PageProfile.css";
 
-function PageProfile({ isLoggedIn, onEditProfile, onSignOut }) {
+function PageProfile({ onEditProfile, onSignOut }) {
   const { values, errors, isValid, handleChange, resetFormCurrentUser } =
     useFormWithValidation();
 
@@ -15,10 +15,10 @@ function PageProfile({ isLoggedIn, onEditProfile, onSignOut }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    onEditProfile(values.email, values.password);
+    onEditProfile(values);
   }
 
-  function handleSignOut(e) {
+  function handleLogout(e) {
     e.preventDefault();
     onSignOut();
   }
@@ -30,13 +30,12 @@ function PageProfile({ isLoggedIn, onEditProfile, onSignOut }) {
   return (
     <section className="profile">
       <Form
-        isLoggedIn={isLoggedIn}
         title="Редактировать профиль"
         buttonTitleEdit="Редактировать"
         buttonTitleExit="Выйти"
         buttonEditClassName={buttonEditClassName}
         buttonExitClassName="button button__main button__main_active"
-        onSignOut={handleSignOut}
+        onSignOut={handleLogout}
         onSubmit={handleSubmit}
       >
         <Input

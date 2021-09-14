@@ -1,23 +1,26 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setStatisticData, resetStatisticData } from "../../store/dataSlice";
+
 import FormSearch from "../FormSearch/FormSearch";
 import Select from "../Select/Select";
-
 import StatisticInfo from "../StatisticInfo/StatisticInfo";
 
 import "./PageStatistic.css";
 
-function PageStatistic({ statisticData, setStatisticData, onSearch }) {
-  const data = JSON.parse(localStorage.getItem("dataList"));
+function PageStatistic() {
+  const dispatch = useDispatch();
+  const { dataList, statisticData } = useSelector((state) => state.data);
+
   const [agent, setAgent] = useState("");
   const [titleStatistic, setTitleStatistic] = useState("");
 
-
   useEffect(() => {
-    setStatisticData(null)
+    dispatch(resetStatisticData())
   }, [])
 
   // DEFINE AGENTS
-  const resultAgents = data.map((item) => item[4]);
+  const resultAgents = dataList.map((item) => item[4]);
   const uniqueAgents = Array.from(new Set(resultAgents));
 
   const buttonSearchClassName = `button button__main ${
@@ -32,14 +35,14 @@ function PageStatistic({ statisticData, setStatisticData, onSearch }) {
 
   function handleSearchClick(e) {
     e.preventDefault();
-    onSearch(agent);
+    dispatch(setStatisticData(agent));
     setTitleStatistic(`Cтатистика по оператору : ${agent}`);
     setAgent('');
   }
 
   return (
     <section className="statistic">
-      <StatisticInfo array={data} title="Общая статистика" />
+      <StatisticInfo array={dataList} title="Общая статистика" />
       <FormSearch
         title="Поиск по оператору"
         buttonTitleSearch="Поиск"

@@ -1,24 +1,23 @@
 import React, { useEffect } from "react";
-import Loader from '../Loader/Loader';
+import { useSelector, useDispatch } from "react-redux";
+import { setNoData } from "../../store/dataSlice";
+import { incrementCount } from "../../store/appSlice";
+
+import Loader from "../Loader/Loader";
 import CardHeader from "../Card/CardHeader";
 import Card from "../Card/Card";
 import Button from "../Button/Button";
 
 import "./PageData.css";
 
-function PageData({
-  noData,
-  count,
-  onGetMoreDataListClick,
-  onGetPhoneInfo,
-  onGetDataList,
-  setNoData,
-}) {
-  const data = JSON.parse(localStorage.getItem("dataList"));
+function PageData({ onGetPhoneInfo, onGetDataList }) {
+  const { count } = useSelector((state) => state.app);
+  const { noData, dataList } = useSelector((state) => state.data);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!!data) {
-      setNoData(false);
+    if (!!dataList) {
+      dispatch(setNoData(false));
     }
     handleGetDataList();
   }, []);
@@ -27,9 +26,9 @@ function PageData({
     onGetDataList();
   }
 
-  function handleMoreClick(e) {
+  function handleIncrementCount(e) {
     e.preventDefault();
-    onGetMoreDataListClick();
+    dispatch(incrementCount());
   }
   if (noData) {
     return <Loader />;
@@ -38,13 +37,13 @@ function PageData({
     <section className="data">
       <CardHeader />
       <ul className="data__list">
-        {data
+        {dataList
           .filter((v, i) => i < count)
           .map((card) => {
             return (
               <Card
-                key={data.findIndex((i) => i === card)}
-                id={data.findIndex((i) => i === card) + 1 + "."}
+                key={dataList.findIndex((i) => i === card)}
+                id={dataList.findIndex((i) => i === card) + 1 + "."}
                 number={card[0]}
                 calltime={card[1]}
                 s_in_wait={card[2]}
@@ -55,11 +54,11 @@ function PageData({
             );
           })}
       </ul>
-      {data.length > count && (
+      {dataList.length > count && (
         <Button
           type="button"
           className="button button__word text-color__blue paragraph text-size__s"
-          onClick={handleMoreClick}
+          onClick={handleIncrementCount}
         >
           Ещё...
         </Button>

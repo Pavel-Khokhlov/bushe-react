@@ -1,11 +1,15 @@
-import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { CurrentUserContext } from "../../context/CurrentUserContext";
+import { useSelector } from "react-redux";
 
 import "./Navigation.css";
 
-const Navigation = ({ isLoggedIn }) => {
-  const currentUser = useContext(CurrentUserContext);
+const Navigation = () => {
+  const { isLoggedIn} = useSelector(
+    (state) => state.app
+  );
+  const { currentUser } = useSelector(
+    (state) => state.users
+  );
 
   return (
     <nav className="nav">

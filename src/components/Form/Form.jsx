@@ -1,10 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import Button from "../Button/Button";
 
 import "./Form.css";
 
 const Form = ({
-  isLoggedIn,
   title,
   buttonTitleLogin,
   buttonTitleEdit,
@@ -17,6 +17,7 @@ const Form = ({
   onSubmit,
   onSignOut,
 }) => {
+  const { isLoggedIn } = useSelector((state) => state.app);
   return (
     <section className="form">
       <form

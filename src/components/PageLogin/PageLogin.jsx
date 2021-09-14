@@ -1,11 +1,23 @@
 import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setCurrentUser,
+} from "../../store/userSlice";
+
+import { useFormWithValidation } from "../Hooks/useForm";
+
 import Input from "../Input/Input";
 import Form from "../Form/Form";
-import { useFormWithValidation } from "../Hooks/useForm";
 
 import "./PageLogin.css";
 
-function PageLogin({ isLoggedIn, onSignIn }) {
+function PageLogin({ onSubmit }) {
+  const { isLoggedIn } = useSelector(
+    (state) => state.app
+  );
+
+  const dispatch = useDispatch();
+
   const { values, errors, isValid, handleChange, resetForm } =
     useFormWithValidation();
 
@@ -15,7 +27,7 @@ function PageLogin({ isLoggedIn, onSignIn }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    onSignIn(values.email, values.password);
+    onSubmit(values);
   }
 
   const buttonLoginClassName = `button button__main ${

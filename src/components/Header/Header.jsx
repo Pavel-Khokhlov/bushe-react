@@ -5,7 +5,7 @@ import Navigation from "../Navigation/Navigation";
 
 import "./Header.css";
 
-function Header({ isLoggedIn, location }) {
+function Header({ location }) {
   const [currentPath, setCurrentPath] = useState(location.pathname);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function Header({ isLoggedIn, location }) {
   return (
     <header className="header">
       <Logo className="logo__header" />
-      <Navigation isLoggedIn={isLoggedIn} />
+      <Navigation />
     </header>
   );
   }

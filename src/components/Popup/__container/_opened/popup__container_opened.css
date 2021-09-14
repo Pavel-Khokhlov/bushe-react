@@ -1,0 +1,5 @@
+.popup__container_opened {
+  transition: all 0.5s ease;
+  opacity: 1;
+  transform: scale(1) perspective(300px) translate(0px, 0px) rotateX(0deg);
+}

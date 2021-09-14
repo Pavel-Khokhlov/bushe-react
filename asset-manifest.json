@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/bushe-react/static/css/main.e7e1189f.chunk.css",
-    "main.js": "/bushe-react/static/js/main.24a7b7ec.chunk.js",
-    "main.js.map": "/bushe-react/static/js/main.24a7b7ec.chunk.js.map",
-    "runtime-main.js": "/bushe-react/static/js/runtime-main.14b2a95f.js",
-    "runtime-main.js.map": "/bushe-react/static/js/runtime-main.14b2a95f.js.map",
-    "static/js/2.3cfa40ca.chunk.js": "/bushe-react/static/js/2.3cfa40ca.chunk.js",
-    "static/js/2.3cfa40ca.chunk.js.map": "/bushe-react/static/js/2.3cfa40ca.chunk.js.map",
-    "static/js/3.2283012a.chunk.js": "/bushe-react/static/js/3.2283012a.chunk.js",
-    "static/js/3.2283012a.chunk.js.map": "/bushe-react/static/js/3.2283012a.chunk.js.map",
+    "main.css": "/bushe-react/static/css/main.5d8d97fc.chunk.css",
+    "main.js": "/bushe-react/static/js/main.d9c26403.chunk.js",
+    "main.js.map": "/bushe-react/static/js/main.d9c26403.chunk.js.map",
+    "runtime-main.js": "/bushe-react/static/js/runtime-main.41ade7b8.js",
+    "runtime-main.js.map": "/bushe-react/static/js/runtime-main.41ade7b8.js.map",
+    "static/js/2.f2f9f48a.chunk.js": "/bushe-react/static/js/2.f2f9f48a.chunk.js",
+    "static/js/2.f2f9f48a.chunk.js.map": "/bushe-react/static/js/2.f2f9f48a.chunk.js.map",
+    "static/js/3.758d38a6.chunk.js": "/bushe-react/static/js/3.758d38a6.chunk.js",
+    "static/js/3.758d38a6.chunk.js.map": "/bushe-react/static/js/3.758d38a6.chunk.js.map",
     "index.html": "/bushe-react/index.html",
-    "static/css/main.e7e1189f.chunk.css.map": "/bushe-react/static/css/main.e7e1189f.chunk.css.map",
-    "static/js/2.3cfa40ca.chunk.js.LICENSE.txt": "/bushe-react/static/js/2.3cfa40ca.chunk.js.LICENSE.txt",
+    "static/css/main.5d8d97fc.chunk.css.map": "/bushe-react/static/css/main.5d8d97fc.chunk.css.map",
+    "static/js/2.f2f9f48a.chunk.js.LICENSE.txt": "/bushe-react/static/js/2.f2f9f48a.chunk.js.LICENSE.txt",
     "static/media/index.css": "/bushe-react/static/media/Roboto-Regular.d535d388.woff",
     "static/media/loader.1a8ca6ec.gif": "/bushe-react/static/media/loader.1a8ca6ec.gif",
     "static/media/logo.693a7463.png": "/bushe-react/static/media/logo.693a7463.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.14b2a95f.js",
-    "static/js/2.3cfa40ca.chunk.js",
-    "static/css/main.e7e1189f.chunk.css",
-    "static/js/main.24a7b7ec.chunk.js"
+    "static/js/runtime-main.41ade7b8.js",
+    "static/js/2.f2f9f48a.chunk.js",
+    "static/css/main.5d8d97fc.chunk.css",
+    "static/js/main.d9c26403.chunk.js"
   ]
 }

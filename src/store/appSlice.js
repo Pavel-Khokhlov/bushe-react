@@ -5,10 +5,10 @@ import { COUNT } from "../utils/config";
 const appSlice = createSlice({
   name: "app",
   initialState: {
-    currentPath: '',
+    currentPath: "",
     isLoggedIn: null,
     isPopupOpen: false,
-    titlePopup: '',
+    titlePopup: "",
     count: COUNT,
     status: null,
     error: null,
@@ -22,6 +22,8 @@ const appSlice = createSlice({
     },
     logoutApp(state, action) {
       state.isLoggedIn = false;
+      localStorage.removeItem("currentUser");
+      localStorage.removeItem("dataList");
     },
     openPopup(state, action) {
       state.isPopupOpen = true;

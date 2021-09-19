@@ -8,4 +8,3 @@ export const REG_EMAIL = /^[^@]+@[^@.]+\.[^@]+$/;
 export const REG_PASSWORD = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\w\s]).{8,}/;
 
 export const ESC_CODE = 27;
-// export const BASE_URL = "https://rickandmortyapi.com/api/episode";

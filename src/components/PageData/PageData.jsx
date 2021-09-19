@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setNoData } from "../../store/dataSlice";
+import { fetchData, setDataList } from "../../store/dataSlice";
 import { incrementCount } from "../../store/appSlice";
+
+import { array } from "../../utils/data";
 
 import Loader from "../Loader/Loader";
 import CardHeader from "../Card/CardHeader";
@@ -10,27 +12,32 @@ import Button from "../Button/Button";
 
 import "./PageData.css";
 
-function PageData({ onGetPhoneInfo, onGetDataList }) {
-  const { count } = useSelector((state) => state.app);
-  const { noData, dataList } = useSelector((state) => state.data);
+function PageData() {
   const dispatch = useDispatch();
+  const { count } = useSelector((state) => state.app);
+  const { dataList, status } = useSelector((state) => state.data);
 
   useEffect(() => {
-    if (!!dataList) {
-      dispatch(setNoData(false));
+    let DATA = JSON.parse(localStorage.getItem("dataList"));
+    if (!DATA) {
+      handleGetDataList();
     }
-    handleGetDataList();
+    dispatch(setDataList(DATA));
   }, []);
 
   function handleGetDataList() {
-    onGetDataList();
+    dispatch(fetchData());
+  }
+
+  if(status === 'rejected') {
+    dispatch(setDataList(array));
   }
 
   function handleIncrementCount(e) {
     e.preventDefault();
     dispatch(incrementCount());
   }
-  if (noData) {
+  if (dataList === null) {
     return <Loader />;
   }
   return (
@@ -49,7 +56,6 @@ function PageData({ onGetPhoneInfo, onGetDataList }) {
                 s_in_wait={card[2]}
                 s_in_talk={card[3]}
                 agent={card[4]}
-                onGetPhoneInfo={onGetPhoneInfo}
               />
             );
           })}

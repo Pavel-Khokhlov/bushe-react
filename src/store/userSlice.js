@@ -13,6 +13,7 @@ const userSlice = createSlice({
         password: action.payload.password,
         email: action.payload.email,
       };
+      localStorage.setItem("currentUser", JSON.stringify(action.payload));
     },
     removeCurrentUser(state, action) {
       state.currentUser = {};

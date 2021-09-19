@@ -1,11 +1,20 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  logoutApp,
+} from "../../store/appSlice";
 import Input from "../Input/Input";
 import Form from "../Form/Form";
 import { useFormWithValidation } from "../Hooks/useForm";
 
 import "./PageProfile.css";
+import { removeCurrentUser, setCurrentUser } from "../../store/userSlice";
+import { setDataList } from "../../store/dataSlice";
 
-function PageProfile({ onEditProfile, onSignOut }) {
+function PageProfile() {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const { values, errors, isValid, handleChange, resetFormCurrentUser } =
     useFormWithValidation();
 
@@ -15,12 +24,15 @@ function PageProfile({ onEditProfile, onSignOut }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    onEditProfile(values);
+    dispatch(setCurrentUser(values));
+    localStorage.setItem("currentUser", JSON.stringify(values));
   }
 
-  function handleLogout(e) {
-    e.preventDefault();
-    onSignOut();
+  function handleLogout() {
+    dispatch(removeCurrentUser());
+    dispatch(logoutApp());
+    dispatch(setDataList([]));
+    history.push("/");
   }
 
   const buttonEditClassName = `button button__word ${

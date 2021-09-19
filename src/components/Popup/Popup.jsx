@@ -1,13 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import CardHeader from "../Card/CardHeader";
 import CardInfo from "../Card/CardInfo";
 import Button from "../Button/Button";
 
 import "./Popup.css";
+import { closeAllPopups, setTitlePopup } from "../../store/appSlice";
+import { resetFilteredList } from "../../store/dataSlice";
 
-const Popup = ({ onClose }) => {
+const Popup = () => {
+  const dispatch = useDispatch();
   const { isPopupOpen, titlePopup } = useSelector((state) => state.app);
   const { filteredList } = useSelector((state) => state.data);
   const popupClassName = `popup ${
@@ -18,8 +21,14 @@ const Popup = ({ onClose }) => {
     isPopupOpen ? "popup__container_opened" : "popup__container_closed"
   }`;
 
+  function handleClosePopup() {
+    dispatch(closeAllPopups());
+    dispatch(setTitlePopup(``));
+    dispatch(resetFilteredList());
+  }
+
   return (
-    <section className={popupClassName} onClick={onClose}>
+    <section className={popupClassName} onClick={handleClosePopup}>
       <div
         className={popupContainerClassName}
         onClick={(e) => e.stopPropagation()}
@@ -28,7 +37,7 @@ const Popup = ({ onClose }) => {
           type="button"
           className="button button__close-popup"
           aria-label="вернуться на страницу"
-          onClick={onClose}
+          onClick={handleClosePopup}
         />
         <h3 className="title title__login text-size__m">{titlePopup}</h3>
         <CardHeader />

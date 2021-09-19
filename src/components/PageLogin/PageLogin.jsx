@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setCurrentUser,
-} from "../../store/userSlice";
+import { setCurrentUser } from "../../store/userSlice";
 
 import { useFormWithValidation } from "../Hooks/useForm";
 
@@ -10,13 +9,12 @@ import Input from "../Input/Input";
 import Form from "../Form/Form";
 
 import "./PageLogin.css";
+import { loginApp } from "../../store/appSlice";
 
-function PageLogin({ onSubmit }) {
-  const { isLoggedIn } = useSelector(
-    (state) => state.app
-  );
-
+function PageLogin() {
+  const history = useHistory();
   const dispatch = useDispatch();
+  const { isLoggedIn } = useSelector((state) => state.app);
 
   const { values, errors, isValid, handleChange, resetForm } =
     useFormWithValidation();
@@ -27,7 +25,9 @@ function PageLogin({ onSubmit }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    onSubmit(values);
+    dispatch(setCurrentUser(values));
+    dispatch(loginApp());
+    history.push("/data-list");
   }
 
   const buttonLoginClassName = `button button__main ${

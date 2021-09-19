@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setStatisticData, resetStatisticData } from "../../store/dataSlice";
 
 import FormSearch from "../FormSearch/FormSearch";
+import Loader from "../Loader/Loader";
 import Select from "../Select/Select";
 import StatisticInfo from "../StatisticInfo/StatisticInfo";
 
@@ -16,11 +17,12 @@ function PageStatistic() {
   const [titleStatistic, setTitleStatistic] = useState("");
 
   useEffect(() => {
-    dispatch(resetStatisticData())
-  }, [])
+    dispatch(resetStatisticData());
+  }, []);
 
   // DEFINE AGENTS
-  const resultAgents = dataList.map((item) => item[4]);
+  const resultAgents =
+    dataList !== null ? dataList.map((item) => item[4]) : null;
   const uniqueAgents = Array.from(new Set(resultAgents));
 
   const buttonSearchClassName = `button button__main ${
@@ -37,9 +39,12 @@ function PageStatistic() {
     e.preventDefault();
     dispatch(setStatisticData(agent));
     setTitleStatistic(`Cтатистика по оператору : ${agent}`);
-    setAgent('');
+    setAgent("");
   }
 
+  if (dataList === null) {
+    return <Loader />;
+  }
   return (
     <section className="statistic">
       <StatisticInfo array={dataList} title="Общая статистика" />
